@@ -14,13 +14,17 @@ app.use(express.static('./public'))
 io.on('connection', (socket) => {
     console.log('New connection!')
 
-    socket.emit('message', 'Hello!')
+    socket.on('joinRoom', (roomName) =>{
+        socket.join(roomName)
 
-    socket.broadcast.emit('message' ,'Someone has joined!')
+        socket.broadcast.to(roomName).emit('message' ,'Someone has joined the room!')
 
-    socket.on('disconnect', () => {
-        io.emit('message', 'Disconnection detected!')
+        socket.on('disconnect', () => {
+            io.to(roomName).emit('message', 'Disconnection detected!')
+        })
     })
+
+    socket.emit('message', 'Hello!')
 })
 
 server.listen(PORT, () => console.log(`Live on port ${PORT}`))
