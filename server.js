@@ -12,7 +12,6 @@ const PORT = process.env.PORT || 8080
 app.use(express.static('./public'))
 
 io.on('connection', (socket) => {
-    console.log('New connection!')
 
     socket.on('joinRoom', (roomName) =>{
         socket.join(roomName)
