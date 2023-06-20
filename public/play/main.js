@@ -15,9 +15,14 @@ socket.on('userCount', (message) => {
     if(message.userCount != 2){
         window.location.href = window.location.origin + '/play/notenoughplayers'
     }else{
+        socket.emit('gameReady')
         startGame()
     }
 })
+socket.on('startGame', () => {
+    startGame()
+})
+
 
 function getRoomName(){
     return new URLSearchParams(window.location.search).get('room') || undefined

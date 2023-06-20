@@ -17,11 +17,14 @@ io.on('connection', (socket) => {
         socket.join(roomName)
 
         try{
-            socket.broadcast.to(roomName).emit('userCount' ,{'content': 'Someone joined', 'userCount': io.sockets.adapter.rooms.get(roomName).size})
+            socket.to(roomName).emit('userCount' ,{'content': 'Someone joined', 'userCount': io.sockets.adapter.rooms.get(roomName).size})
         }catch(e){
             socket.broadcast.to(roomName).emit('message', {'message' : 'Error while calculating the user count', 'error' : e})
         }
 
+        socket.on('gameReady', () => {
+            socket.broadcast.to(roomName).emit('startGame')
+        })
 
         socket.on('disconnect', () => {
             //io.to(roomName).emit('message', 'Disconnection detected!')
