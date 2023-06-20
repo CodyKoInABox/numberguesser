@@ -35,6 +35,18 @@ io.on('connection', (socket) => {
             socket.broadcast.to(roomName).emit('bothPlayersAreReady')
         })
 
+        socket.on('guess', (guess) => {
+            socket.broadcast.to(roomName).emit('otherPlayerGuess', guess)
+        })
+
+        socket.on('correctGuess', (guess) => {
+            socket.broadcast.to(roomName).emit('guessIsCorrect', {'guess': guess.guess, 'isGuessHigher': guess.isGuessHigher})
+        })
+
+        socket.on('wrongGuess', (guess) => {
+            socket.broadcast.to(roomName).emit('guessIsWrong', {'guess': guess.guess, 'isGuessHigher': guess.isGuessHigher})
+        })
+
         socket.on('disconnect', () => {
             //io.to(roomName).emit('message', 'Disconnection detected!')
             try{

@@ -28,6 +28,18 @@ socket.on('otherPlayerIsReady', () =>{
     checkIfBothPlayerHaveChosen()
 })
 
+socket.on('otherPlayerGuess', (guess) => {
+    otherPlayerGuess(guess)
+})
+
+socket.on('guessIsCorrect', (guess) => {
+    correctGuess(guess)
+})
+
+socket.on('guessIsWrong', (guess) => {
+    wrongGuess(guess)
+})
+
 function getRoomName(){
     return new URLSearchParams(window.location.search).get('room') || undefined
 }
@@ -36,6 +48,8 @@ function getRoomName(){
 //-------------------------------------//
 // ONLY GAME LOGIC UNDER THIS COMMENT //
 //-----------------------------------//
+
+let chosenNumber = 0
 
 //POSSIBLE STATES:
 // waiting -> Waiting for second player to join
@@ -46,6 +60,8 @@ let currentState = 'waiting'
 let havePlayerChosen = false
 let haveOtherPlayerChosen = false
 
+let havePlayerGuessed = false
+let haveOtherPlayerGuessed = false
 //i should probably change this name
 //later =)
 function pushNumberToPlayStack(number){
@@ -77,6 +93,7 @@ function rightConfirmButtonIsClicked(){
     switch(currentState){
         case 'guessing':
             playerGuessedANumber()
+            checkIfBothPlayerHaveGuessed()
         break;
     }
 }
@@ -101,6 +118,15 @@ function checkIfBothPlayerHaveChosen(){
     }
 }
 
+//check if both players have guessed in that round
+function checkIfBothPlayerHaveGuessed(){
+    if(havePlayerGuessed && haveOtherPlayerGuessed){
+        //start new round
+        havePlayerGuessed = false
+        haveOtherPlayerGuessed = false
+    }
+}
+
 //when both players have chosen a number
 function readyToStartGuessing(){
     makeRightButtonsClickable()
@@ -109,11 +135,41 @@ function readyToStartGuessing(){
 
     changeLeftStateText('OTHER PLAYER IS GUESSING')
     changeLeftInfoText('YOUR NUMBER IS ' + currentPlay)
+    chosenNumber = currentPlay
 }
 
 //when the player guesses a number
 function playerGuessedANumber(){
     socket.emit('guess', currentPlay)
+    havePlayerGuessed = true
+}
+
+//when the other player makes a guess
+function otherPlayerGuess(guess){
+    let isGuessHigher
+    if(guess > chosenNumber){
+        isGuessHigher = true
+    }else{
+        isGuessHigher = false
+    }
+
+    if(guess == chosenNumber){
+        socket.emit('correctGuess', {'guess': guess, 'isGuessHigher': isGuessHigher})
+    }else{
+        socket.emit('wrongGuess', {'guess': guess, 'isGuessHigher': isGuessHigher})
+    }
+    haveOtherPlayerGuessed = true
+}
+
+//when player's guess is correct
+function correctGuess(guess){
+    //END GAME WITH WIN
+    console.log('CORRECT GUESS')
+}
+
+//when player's guess is wrong
+function wrongGuess(guess){
+    console.log('WRONG GUESS')
 }
 
 //when the player chooses a number
@@ -186,6 +242,7 @@ function makeLeftConfirmButtonClickable(){
 function makeLeftConfirmButtonNotClickable(){
     document.getElementById('leftConfirm').style.pointerEvents = 'none';
 }
+
 
 //make both confirm buttons clickable
 function makeConfirmButtonsClickable(){
