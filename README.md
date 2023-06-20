@@ -4,4 +4,5 @@
 ## TO RUN LOCALLY
 
 npm i
+
 npm run dev
