@@ -91,3 +91,7 @@ body{
 .confirmButton{
     pointer-events: none;
 }
+.infoText{
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 10vh;
+}

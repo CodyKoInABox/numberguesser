@@ -44,10 +44,11 @@ function startGame(){
     
     changeRightStateText('OTHER PLAYER IS CHOOSING HIS NUMBER')
     changeLeftStateText('CHOOSE A NUMBER')
+
+    makeLeftButtonsClickable()
+    makeLeftConfirmButtonClickable()
     
 }
-
-
 
 //make right buttons clickable
 function makeRightButtonsClickable(){
@@ -81,7 +82,28 @@ function makeLeftButtonsNotClickable(){
     }
 }
 
-//make confirm buttons clickable
+//make right confirm button clickable
+function makeRightConfirmButtonClickable(){
+    document.getElementById('rightConfirm').style.pointerEvents = 'all';
+}
+
+//make right confirm button NOT clickable
+function makeRightConfirmButtonNotClickable(){
+    document.getElementById('rightConfirm').style.pointerEvents = 'none';
+}
+
+
+//make left confirm button clickable
+function makeLeftConfirmButtonClickable(){
+    document.getElementById('leftConfirm').style.pointerEvents = 'all';
+}
+
+//make left confirm button NOT clickable
+function makeLeftConfirmButtonNotClickable(){
+    document.getElementById('leftConfirm').style.pointerEvents = 'none';
+}
+
+//make both confirm buttons clickable
 function makeConfirmButtonsClickable(){
    let confirmButtons = document.getElementsByClassName('confirmButton')
    for(let i = 0; i < confirmButtons.length; i++){
@@ -89,7 +111,7 @@ function makeConfirmButtonsClickable(){
     }
 }
 
-//make confirm buttons NOT clickable
+//make both confirm buttons NOT clickable
 function makeConfirmButtonsNotClickable(){
     let confirmButtons = document.getElementsByClassName('confirmButton')
     for(let i = 0; i < confirmButtons.length; i++){
@@ -132,4 +154,14 @@ function leftNumberButtonIsClicked(buttonNumber){
     let currentButton = document.getElementById('left' + buttonNumber)
     currentButton.style.boxShadow = '0px 0vh rgb(0, 0, 0, 0)';
     currentButton.style.backgroundColor = 'hsl(187, 71%, 60%)';
+}
+
+//change right info text
+function changeRightInfoText(newInfoText){
+    document.getElementById('rightInfo').innerText = newInfoText
+}
+
+//change left info text
+function changeLeftInfoText(newInfoText){
+    document.getElementById('leftInfo').innerText = newInfoText
 }
