@@ -74,7 +74,11 @@ function startGame(){
 
 //when right confirm button is clicked
 function rightConfirmButtonIsClicked(){
-
+    switch(currentState){
+        case 'guessing':
+            playerGuessedANumber()
+        break;
+    }
 }
 
 //when left confirm button is clicked
@@ -99,7 +103,17 @@ function checkIfBothPlayerHaveChosen(){
 
 //when both players have chosen a number
 function readyToStartGuessing(){
+    makeRightButtonsClickable()
+    changeRightStateText("GUESS THE OTHER PLAYER'S NUMBER") 
+    makeRightConfirmButtonClickable()
 
+    changeLeftStateText('OTHER PLAYER IS GUESSING')
+    changeLeftInfoText('YOUR NUMBER IS ' + currentPlay)
+}
+
+//when the player guesses a number
+function playerGuessedANumber(){
+    socket.emit('guess', currentPlay)
 }
 
 //when the player chooses a number
