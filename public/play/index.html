@@ -11,44 +11,48 @@
 <body>
     <div class="content">
         <div class="contentLeft contentSide">
+        <div id="blockLeft" class="contentBlock">
             <h1 id="leftState" class="currentPlay">Choose a number</h1>
             <div class="numbersContainer">
                 <div class="numbersContainerRow">
-                    <div id="left1" class="number">1</div>
-                    <div id="left2" class="number">2</div>
-                    <div id="left3" class="number">3</div>
-                    <div id="left4" class="number">4</div>
-                    <div id="left5" class="number">5</div>
+                    <div id="left1" class="number" onclick="pushNumberToPlayStack(1)">1</div>
+                    <div id="left2" class="number" onclick="pushNumberToPlayStack(2)">2</div>
+                    <div id="left3" class="number" onclick="pushNumberToPlayStack(3)">3</div>
+                    <div id="left4" class="number" onclick="pushNumberToPlayStack(4)">4</div>
+                    <div id="left5" class="number" onclick="pushNumberToPlayStack(5)">5</div>
                 </div>
                 <div class="numbersContainerRow">
-                    <div id="left6" class="number">6</div>
-                    <div id="left7" class="number">7</div>
-                    <div id="left8" class="number">8</div>
-                    <div id="left9" class="number">9</div>
-                    <div id="left10" class="number">10</div>
+                    <div id="left6" class="number" onclick="pushNumberToPlayStack(6)">6</div>
+                    <div id="left7" class="number" onclick="pushNumberToPlayStack(7)">7</div>
+                    <div id="left8" class="number" onclick="pushNumberToPlayStack(8)">8</div>
+                    <div id="left9" class="number" onclick="pushNumberToPlayStack(9)">9</div>
+                    <div id="left10" class="number" onclick="pushNumberToPlayStack(10)">10</div>
                 </div>
             </div>
             <button id="leftConfirm" class="confirmButton">Confirm</button>
         </div>
+        </div>
         <div class="contentRight contentSide">
+        <div id="blockRight" class="contentBlock blockActive">
             <h1 id="rightState" class="currentPlay">Other player is choosing</h1>
             <div class="numbersContainer">
                 <div class="numbersContainerRow">
-                    <div id="right1" class="number">1</div>
-                    <div id="right2" class="number">2</div>
-                    <div id="right3" class="number">3</div>
-                    <div id="right4" class="number">4</div>
-                    <div id="right5" class="number">5</div>
+                    <div id="right1" class="number" onclick="pushNumberToPlayStack(1)">1</div>
+                    <div id="right2" class="number" onclick="pushNumberToPlayStack(2)">2</div>
+                    <div id="right3" class="number" onclick="pushNumberToPlayStack(3)">3</div>
+                    <div id="right4" class="number" onclick="pushNumberToPlayStack(4)">4</div>
+                    <div id="right5" class="number" onclick="pushNumberToPlayStack(5)">5</div>
                 </div>
                 <div class="numbersContainerRow">
-                    <div id="right6" class="number">6</div>
-                    <div id="right7" class="number">7</div>
-                    <div id="right8" class="number">8</div>
-                    <div id="right9" class="number">9</div>
-                    <div id="right10" class="number">10</div>
+                    <div id="right6" class="number" onclick="pushNumberToPlayStack(6)">6</div>
+                    <div id="right7" class="number" onclick="pushNumberToPlayStack(7)">7</div>
+                    <div id="right8" class="number" onclick="pushNumberToPlayStack(8)">8</div>
+                    <div id="right9" class="number" onclick="pushNumberToPlayStack(9)">9</div>
+                    <div id="right10" class="number" onclick="pushNumberToPlayStack(10)">10</div>
                 </div>
             </div>
             <button id="rightConfirm" class="confirmButton">Confirm</button>
+        </div>
         </div>
     </div>
 </body>

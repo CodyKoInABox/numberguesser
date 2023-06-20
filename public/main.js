@@ -1,3 +1,5 @@
+let currentPlay = 1
+
 const socket = io()
 socket.emit('joinRoom', getRoomName())
 
@@ -11,4 +13,18 @@ function joinRoom(roomName){
 
 function getRoomName(){
     return new URLSearchParams(window.location.search).get('room') || undefined
+}
+
+
+//-------------------------------------//
+// ONLY GAME LOGIC UNDER THIS COMMENT //
+//-----------------------------------//
+
+//i should probably optmize this later
+function pushNumberToPlayStack(number){
+    currentPlay = number
+}
+
+function getLatestPlay(){
+    return currentPlay
 }
