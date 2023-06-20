@@ -23,6 +23,10 @@ socket.on('startGame', () => {
     startGame()
 })
 
+socket.on('otherPlayerIsReady', () =>{
+    otherPlayerChoseTheirNumber()
+    checkIfBothPlayerHaveChosen()
+})
 
 function getRoomName(){
     return new URLSearchParams(window.location.search).get('room') || undefined
@@ -32,6 +36,15 @@ function getRoomName(){
 //-------------------------------------//
 // ONLY GAME LOGIC UNDER THIS COMMENT //
 //-----------------------------------//
+
+//POSSIBLE STATES:
+// waiting -> Waiting for second player to join
+// choosing -> For when both players are choosing a number
+// guessing -> For when both players are guessing
+let currentState = 'waiting'
+
+let havePlayerChosen = false
+let haveOtherPlayerChosen = false
 
 //i should probably change this name
 //later =)
@@ -46,13 +59,61 @@ function getLatestPlay(){
 
 //by default the HTML displays the WAITING FOR PLAYER state, this function changes that to the choose number state
 function startGame(){
-    
-    changeRightStateText('OTHER PLAYER IS CHOOSING HIS NUMBER')
-    changeLeftStateText('CHOOSE A NUMBER')
+    currentState = 'choosing'
 
+    changeRightStateText('OTHER PLAYER IS CHOOSING A NUMBER')
+    makeRightButtonsNotClickable()
+    makeRightConfirmButtonNotClickable()
+
+    changeLeftStateText('CHOOSE A NUMBER')
     makeLeftButtonsClickable()
     makeLeftConfirmButtonClickable()
     
+}
+
+
+//when right confirm button is clicked
+function rightConfirmButtonIsClicked(){
+
+}
+
+//when left confirm button is clicked
+function leftConfirmButtonIsClicked(){
+    switch(currentState){
+        case 'choosing':
+            playerChooseTheirNumber()
+            havePlayerChosen = true
+            checkIfBothPlayerHaveChosen()
+        break;
+
+    }
+}
+
+//check if both players have chosen a number and if true start guessing phase
+function checkIfBothPlayerHaveChosen(){
+    if(havePlayerChosen && haveOtherPlayerChosen){
+        readyToStartGuessing()
+        currentState = 'guessing'
+    }
+}
+
+//when both players have chosen a number
+function readyToStartGuessing(){
+
+}
+
+//when the player chooses a number
+function playerChooseTheirNumber(){
+    socket.emit('chosenNumber', {'number': currentPlay, 'playerID': socket.id})
+    makeLeftButtonsNotClickable()
+    makeLeftConfirmButtonNotClickable()
+    document.getElementById('left' + currentPlay).style.backgroundColor = 'hsl(187, 71%, 60%)'
+}
+
+//when the OTHER player has choosen their number
+function otherPlayerChoseTheirNumber(){
+    changeRightStateText('OTHER PLAYER HAS CHOSEN A NUMBER')
+    haveOtherPlayerChosen = true
 }
 
 //make right buttons clickable
@@ -60,6 +121,7 @@ function makeRightButtonsClickable(){
     let numberRight = document.getElementsByClassName('numberRight')
     for(let i = 0; i < numberRight.length; i++){
         numberRight[i].style.pointerEvents = 'all';
+        numberRight[i].style.backgroundColor = '#E9EB87';
     }
 }
 
@@ -68,6 +130,7 @@ function makeRightButtonsNotClickable(){
     let numberRight = document.getElementsByClassName('numberRight')
     for(let i = 0; i < numberRight.length; i++){
         numberRight[i].style.pointerEvents = 'none';
+        numberRight[i].style.backgroundColor = '#8d8d8d';
     }
 }
 
@@ -76,6 +139,7 @@ function makeLeftButtonsClickable(){
     let numberLeft = document.getElementsByClassName('numberLeft')
     for(let i = 0; i < numberLeft.length; i++){
         numberLeft[i].style.pointerEvents = 'all';
+        numberLeft[i].style.backgroundColor = '#E9EB87';
     }
 }
 
@@ -84,6 +148,7 @@ function makeLeftButtonsNotClickable(){
     let numberLeft = document.getElementsByClassName('numberLeft')
     for(let i = 0; i < numberLeft.length; i++){
         numberLeft[i].style.pointerEvents = 'none';
+        numberLeft[i].style.backgroundColor = '#8d8d8d';
     }
 }
 

@@ -26,6 +26,15 @@ io.on('connection', (socket) => {
             socket.broadcast.to(roomName).emit('startGame')
         })
 
+    
+        socket.on('chosenNumber', (data) => {
+            socket.broadcast.to(roomName).emit('otherPlayerIsReady')
+        })
+
+        socket.on('readyToGuess', () => {
+            socket.broadcast.to(roomName).emit('bothPlayersAreReady')
+        })
+
         socket.on('disconnect', () => {
             //io.to(roomName).emit('message', 'Disconnection detected!')
             try{
