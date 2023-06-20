@@ -57,6 +57,7 @@ body{
 .number:active{
     transform: translate(0px, 0.335vh);
     box-shadow: 0px 0vh rgb(0, 0, 0, 0);
+    background-color: hsl(187, 71%, 60%);
     transition: .1s;
 }
 .currentPlay{
@@ -76,7 +77,17 @@ body{
     z-index: 10;
     background-color: rgb(0, 0, 0, 0.35);
     position: absolute;
+    display: none;
 }
 .blockActive{
+    pointer-events: none;
+}
+.numberRight{
+    pointer-events: none;
+}
+.numberLeft{
+    pointer-events: none;
+}
+.confirmButton{
     pointer-events: none;
 }

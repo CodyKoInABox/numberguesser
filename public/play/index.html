@@ -5,54 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Number Guesser | Game</title>
     <script defer src="/socket.io/socket.io.js"></script>
-    <script defer src="../main.js"></script>
+    <script defer src="./main.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="content">
         <div class="contentLeft contentSide">
-        <div id="blockLeft" class="contentBlock">
-            <h1 id="leftState" class="currentPlay">Choose a number</h1>
+        <div id="blockLeft" class="contentBlock"></div>
+            <h1 id="leftState" class="currentPlay">WAITING FOR SECOND PLAYER</h1>
             <div class="numbersContainer">
                 <div class="numbersContainerRow">
-                    <div id="left1" class="number" onclick="pushNumberToPlayStack(1)">1</div>
-                    <div id="left2" class="number" onclick="pushNumberToPlayStack(2)">2</div>
-                    <div id="left3" class="number" onclick="pushNumberToPlayStack(3)">3</div>
-                    <div id="left4" class="number" onclick="pushNumberToPlayStack(4)">4</div>
-                    <div id="left5" class="number" onclick="pushNumberToPlayStack(5)">5</div>
+                    <div id="left1" class="number numberLeft" onclick="pushNumberToPlayStack(1); leftNumberButtonIsClicked(1)">1</div>
+                    <div id="left2" class="number numberLeft" onclick="pushNumberToPlayStack(2); leftNumberButtonIsClicked(2)">2</div>
+                    <div id="left3" class="number numberLeft" onclick="pushNumberToPlayStack(3); leftNumberButtonIsClicked(3)">3</div>
+                    <div id="left4" class="number numberLeft" onclick="pushNumberToPlayStack(4); leftNumberButtonIsClicked(4)">4</div>
+                    <div id="left5" class="number numberLeft" onclick="pushNumberToPlayStack(5); leftNumberButtonIsClicked(5)">5</div>
                 </div>
                 <div class="numbersContainerRow">
-                    <div id="left6" class="number" onclick="pushNumberToPlayStack(6)">6</div>
-                    <div id="left7" class="number" onclick="pushNumberToPlayStack(7)">7</div>
-                    <div id="left8" class="number" onclick="pushNumberToPlayStack(8)">8</div>
-                    <div id="left9" class="number" onclick="pushNumberToPlayStack(9)">9</div>
-                    <div id="left10" class="number" onclick="pushNumberToPlayStack(10)">10</div>
+                    <div id="left6" class="number numberLeft" onclick="pushNumberToPlayStack(6); leftNumberButtonIsClicked(6)">6</div>
+                    <div id="left7" class="number numberLeft" onclick="pushNumberToPlayStack(7); leftNumberButtonIsClicked(7)">7</div>
+                    <div id="left8" class="number numberLeft" onclick="pushNumberToPlayStack(8); leftNumberButtonIsClicked(8)">8</div>
+                    <div id="left9" class="number numberLeft" onclick="pushNumberToPlayStack(9); leftNumberButtonIsClicked(9)">9</div>
+                    <div id="left10" class="number numberLeft" onclick="pushNumberToPlayStack(10); leftNumberButtonIsClicked(10)">10</div>
                 </div>
             </div>
             <button id="leftConfirm" class="confirmButton">Confirm</button>
         </div>
-        </div>
         <div class="contentRight contentSide">
-        <div id="blockRight" class="contentBlock blockActive">
-            <h1 id="rightState" class="currentPlay">Other player is choosing</h1>
+        <div id="blockRight" class="contentBlock"></div>
+            <h1 id="rightState" class="currentPlay">YOU CAN SHARE THIS PAGE'S URL WITH A FRIEND</h1>
             <div class="numbersContainer">
                 <div class="numbersContainerRow">
-                    <div id="right1" class="number" onclick="pushNumberToPlayStack(1)">1</div>
-                    <div id="right2" class="number" onclick="pushNumberToPlayStack(2)">2</div>
-                    <div id="right3" class="number" onclick="pushNumberToPlayStack(3)">3</div>
-                    <div id="right4" class="number" onclick="pushNumberToPlayStack(4)">4</div>
-                    <div id="right5" class="number" onclick="pushNumberToPlayStack(5)">5</div>
+                    <div id="right1" class="number numberRight" onclick="pushNumberToPlayStack(1); rightNumberButtonIsClicked(1)">1</div>
+                    <div id="right2" class="number numberRight" onclick="pushNumberToPlayStack(2); rightNumberButtonIsClicked(2)">2</div>
+                    <div id="right3" class="number numberRight" onclick="pushNumberToPlayStack(3); rightNumberButtonIsClicked(3)">3</div>
+                    <div id="right4" class="number numberRight" onclick="pushNumberToPlayStack(4); rightNumberButtonIsClicked(4)">4</div>
+                    <div id="right5" class="number numberRight" onclick="pushNumberToPlayStack(5); rightNumberButtonIsClicked(5)">5</div>
                 </div>
                 <div class="numbersContainerRow">
-                    <div id="right6" class="number" onclick="pushNumberToPlayStack(6)">6</div>
-                    <div id="right7" class="number" onclick="pushNumberToPlayStack(7)">7</div>
-                    <div id="right8" class="number" onclick="pushNumberToPlayStack(8)">8</div>
-                    <div id="right9" class="number" onclick="pushNumberToPlayStack(9)">9</div>
-                    <div id="right10" class="number" onclick="pushNumberToPlayStack(10)">10</div>
+                    <div id="right6" class="number numberRight" onclick="pushNumberToPlayStack(6); rightNumberButtonIsClicked(6)">6</div>
+                    <div id="right7" class="number numberRight" onclick="pushNumberToPlayStack(7); rightNumberButtonIsClicked(7)">7</div>
+                    <div id="right8" class="number numberRight" onclick="pushNumberToPlayStack(8); rightNumberButtonIsClicked(8)">8</div>
+                    <div id="right9" class="number numberRight" onclick="pushNumberToPlayStack(9); rightNumberButtonIsClicked(9)">9</div>
+                    <div id="right10" class="number numberRight" onclick="pushNumberToPlayStack(10); rightNumberButtonIsClicked(10)">10</div>
                 </div>
             </div>
             <button id="rightConfirm" class="confirmButton">Confirm</button>
-        </div>
         </div>
     </div>
 </body>
